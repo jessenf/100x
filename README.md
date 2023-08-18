@@ -1,1 +1,1 @@
-# 100x Exercises for 100x
+# Train Schedule Index HTML for 100x Github Exercise
