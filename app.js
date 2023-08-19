@@ -35,6 +35,76 @@ let flights = [
     flight: "TAMU TRAIN",
     gate: "🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜",
     remarks: "AS SCHEDULED"
+  },
+  {
+    time: "08:11",
+    destination: "TENOM",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜",
+    remarks: "AS SCHEDULED"
+   },
+  {
+    time: "12:39",
+    destination: "BEAUFORT",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜",
+    remarks: "DELAYED"
+   },
+  {
+    time: "13:21",
+    destination: "TANJUNG ARU",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜",
+    remarks: "AS SCHEDULED"
+  },
+  {
+    time: "14:01",
+    destination: "SEMBULAN",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜",
+    remarks: "AS SCHEDULED"
+  },
+  {
+    time: "15:22",
+    destination: "HALOGILAT",
+    flight: "TAMU TRAIN",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜",
+    remarks: "AS SCHEDULED"
+  },
+  {
+    time: "08:11",
+    destination: "TENOM",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜",
+    remarks: "AS SCHEDULED"
+   },
+  {
+    time: "12:39",
+    destination: "BEAUFORT",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜",
+    remarks: "DELAYED"
+   },
+  {
+    time: "13:21",
+    destination: "TANJUNG ARU",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜",
+    remarks: "AS SCHEDULED"
+  },
+  {
+    time: "14:01",
+    destination: "SEMBULAN",
+    flight: "LCC101",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜",
+    remarks: "AS SCHEDULED"
+  },
+  {
+    time: "15:22",
+    destination: "HALOGILAT",
+    flight: "TAMU TRAIN",
+    gate: "🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜",
+    remarks: "AS SCHEDULED"
   }
 ]
 
