@@ -1,1 +1,2 @@
-# 100x First Project Train Schedule Index HTML for 100x Github Exercise
+# 100x First Assignment
+Original Source from Kubowania
