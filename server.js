@@ -10,6 +10,23 @@ app.use(express.static(__dirname));
 
 let onlineUsers = [];
 
+const emojiMap = {
+  "react": "⚛️",
+  "woah": "😮",
+  "hey": "👋",
+  "lol": "😂",
+  "like": "❤️",
+  "congratulations": "🎉"
+};
+
+function replaceWithEmojis(text) {
+  for (let keyword in emojiMap) {
+    let regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+    text = text.replace(regex, emojiMap[keyword]);
+  }
+  return text;
+}
+
 io.on('connection', (socket) => {
     console.log('a user connected');
 
@@ -20,6 +37,10 @@ io.on('connection', (socket) => {
 
     socket.on('send message', (data) => {
         data.id = socket.id;
+
+        // Replace certain words with emojis
+        data.text = replaceWithEmojis(data.text);
+
         io.emit('receive message', data);
     });
 
