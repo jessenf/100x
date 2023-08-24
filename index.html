@@ -1,32 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Flight Widget</title>
     <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
+    <title>Chat App</title>
+</head>
 
-    <div class="departures">
-      <header><center>RAILWAY TIMETABLE</center></header>
-      <table>
-        <thead>
-        <tr>
-          <th></th>
-          <th id="time">DEPART</th>
-          <th id="destination">ORIGIN</th>
-          <th id="flight">SERVICE NO.</th>
-          <th id="gate">TRAIN CAPACITY</th>
-          <th id="remarks">STATUS</th>
-        </tr>
-      </thead>
-      <tbody id="table-body"></tbody>
-      </table>
+<body>
+    <div id="login">
+        <input type="text" id="username" placeholder="Enter your username">
+        <button onclick="startChat()">Join Chat</button>
     </div>
 
+    <div id="chat-app" style="display:none;">
+        <div class="chat-container">
+            <div class="chat-main">
+                <div class="chat-header">
+                    Chat Room
+                </div>
+                <div class="chat-messages">
+                </div>
+                <form class="chat-input">
+                    <input type="text" placeholder="Type a message...">
+                    <button>Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-	<script src="app.js"></script>
-  </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const emojiMap = {
+          "react": "⚛️",
+          "woah": "😮",
+          "hey": "👋",
+          "lol": "😂",
+          "like": "❤️",
+          "congratulations": "🎉"
+        };
+
+        function replaceWithEmojis(text) {
+          for (let keyword in emojiMap) {
+            let regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+            text = text.replace(regex, emojiMap[keyword]);
+          }
+          return text;
+        }
+
+        let currentUsername = '';
+
+        function startChat() {
+            currentUsername = $('#username').val();
+            if (currentUsername) {
+                $('#login').hide();
+                $('#chat-app').show();
+                socket.emit('user joined', currentUsername);
+            } else {
+                alert("Please enter a username.");
+            }
+        }
+
+        var socket = io();
+
+        $('.chat-input').submit(function(e) {
+            e.preventDefault();
+            let message = $(this).find('input').val();
+
+            // Handle the /info command without emitting to the server
+            if (message === "/info") {
+                $('.chat-messages').append($('<div>').addClass('message sent').text("This is a chat app for 100x assignment."));
+                $(this).find('input').val('');
+                $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+                return false; // Exit early without sending to other participants
+            }
+            
+            // Replace keywords with emojis in the message before sending
+            message = replaceWithEmojis(message);
+
+            socket.emit('send message', { id: socket.id, user: currentUsername, text: message });
+            $('.chat-messages').append($('<div>').addClass('message sent').text(currentUsername + ": " + message));
+            $(this).find('input').val('');
+            $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+            return false;
+        });
+
+        socket.on('receive message', function(data) {
+            if (data.id !== socket.id) {
+                let receivedMessage = replaceWithEmojis(data.text);
+                $('.chat-messages').append($('<div>').addClass('message received').text(data.user + ": " + receivedMessage));
+                $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+            }
+        });
+    </script>
+</body>
+
 </html>
